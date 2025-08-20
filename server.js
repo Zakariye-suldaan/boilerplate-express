@@ -20,6 +20,12 @@ if (!process.env.DISABLE_XORIGIN) {
     next();
   });
 }
+// Use the app.get() method to serve the string "Hello Express" to GET requests matching the / (root) path. Be sure that your code works by looking at the logs.
+app.get("/", function (req, res) {
+  res.send("Hello Express");
+  
+})
+
 
 const port = process.env.PORT || 3000;
 bGround.setupBackgroundApp(app, myApp, __dirname).listen(port, () => {
