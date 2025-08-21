@@ -1,5 +1,6 @@
 let express = require('express');
 let app = express();
+let bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Root-level logger middleware
@@ -10,6 +11,9 @@ app.use((req, res, next) => {
 
 // Serve static assets
 app.use("/public", express.static(__dirname + "/public"));
+
+// Parse URL-encoded bodies (as sent by HTML forms)
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Serve HTML file on root route
 app.get("/", (req, res) => {
@@ -42,5 +46,6 @@ app.get('/:word/echo', (req, res) => {
 app.get('/name', (req, res) => {
   res.json({ name: `${req.query.first} ${req.query.last}` });
 });
+
 
 module.exports = app;
