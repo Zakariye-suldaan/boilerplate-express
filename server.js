@@ -20,11 +20,12 @@ if (!process.env.DISABLE_XORIGIN) {
     next();
   });
 }
-// Use the app.get() method to serve the string "Hello Express" to GET requests matching the / (root) path. Be sure that your code works by looking at the logs.
-app.get("/", function (req, res) {
-  res.send("Hello Express");
-  
-})
+
+app.use('/public', express.static(__dirname + '/public'));
+
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/views/index.html");
+});
 
 
 const port = process.env.PORT || 3000;
